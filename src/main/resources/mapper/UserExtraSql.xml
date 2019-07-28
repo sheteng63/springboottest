@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  -->
+<mapper namespace="com.example.demo.dao.UserExtraDao">
+
+    <sql id="queryParam">
+
+        <if test="platUserId != null and platUserId != ''">
+            AND a.PLAT_USER_ID = #{platUserId}   <!--用户ID-->
+        </if>
+        <if test="merchantNo != null and merchantNo != ''">
+            AND a.MERCHANT_NO = #{merchantNo}   <!--商户号-->
+        </if>
+        <if test="merchantStatus != null and merchantStatus != ''">
+            AND a.MERCHANT_STATUS = #{merchantStatus}   <!--开通商户状态  0 无效 1有效-->
+        </if>
+        <if test="productStatus != null and productStatus != ''">
+            AND a.PRODUCT_STATUS = #{productStatus}   <!--开通产品的状态 0 无效 1有效-->
+        </if>
+        <if test="createTime != null and createTime != ''">
+            AND a.CREATE_TIME = #{createTime}   <!--创建时间-->
+        </if>
+        <if test="createBy != null and createBy != ''">
+            AND a.CREATE_BY = #{createBy}   <!--创建人-->
+        </if>
+        <if test="modifyBy != null and modifyBy != ''">
+            AND a.MODIFY_BY = #{modifyBy}   <!--修改人-->
+        </if>
+        <if test="modifyTime != null and modifyTime != ''">
+            AND a.MODIFY_TIME = #{modifyTime}   <!--修改时间-->
+        </if>
+        <if test="queryKey != null and queryKey != ''">
+            AND a.QUERY_KEY = #{queryKey}   <!--商户交易查询签名秘钥-->
+        </if>
+        <if test="desKey != null and desKey != ''">
+            AND a.DES_KEY = #{desKey}   <!--交易加密秘钥-->
+        </if>
+        <if test="signKey != null and signKey != ''">
+            AND a.SIGN_KEY = #{signKey}   <!--交易签名秘钥-->
+        </if>
+        <if test="attribute1 != null and attribute1 != ''">
+            AND a.ATTRIBUTE1 = #{attribute1}   <!--备用字段-->
+        </if>
+    </sql>
+
+    <!--插入-->
+    <insert id="insert" parameterType="com.example.demo.entity.UserExtraEntity">
+        insert into T_BENE_USER_EXTRA(
+        PLAT_USER_ID,
+        MERCHANT_NO,
+        MERCHANT_STATUS,
+        PRODUCT_STATUS,
+        CREATE_TIME,
+        CREATE_BY,
+        MODIFY_BY,
+        MODIFY_TIME,
+        QUERY_KEY,
+        DES_KEY,
+        SIGN_KEY,
+        ATTRIBUTE1
+        )values(
+        #{platUserId},  <!--用户ID-->
+        #{merchantNo} ,
+        #{merchantStatus},
+        #{productStatus},
+        #{createTime},
+        #{createBy},
+        #{modifyBy},
+        #{modifyTime},
+        #{queryKey},
+        #{desKey},
+        #{signKey},
+        #{attribute1}
+        )
+    </insert>
+
+
+    <!--查询一批数据的查询-->
+    <select id="selectList" resultType="com.example.demo.entity.UserEntity">
+        select
+                a.PLAT_USER_ID as platUserId,  <!--用户ID-->
+                a.MER_CODE as merCode,  <!--商户编号-->
+          		a.COPT_CODE ,   <!--合作平台编号-->
+                a.PLAT_MER_ACCCODE as platMerAccCode,  <!--平台商户账户号-->
+                a.TRX_ID as trxId,  <!--平台交易流水号-->
+                a.TRX_DT_TM as trxDtTm,  <!--交易日期时间-->
+                a.USER_TYPE as userType,  <!--用户类型: 01、个人-->
+                a.USER_NAME as userName,  <!--用户名-->
+                a.IDENT_TYPE as identType,  <!--证件类型:01、身份证 02、护照 03、港澳台居民通行证 04、外国人永久居留证-->
+                a.IDENT_NO as identNo,  <!--用户证件号码_密文-->
+                a.USER_REAL_NAME as userRealName,  <!--用户真实姓名_密文-->
+                a.USER_MOBILE_NO as userMobileNo,  <!--用户手机号_密文-->
+                a.TRX_STATUS as trxStatus,  <!--交易状态 SUCCESS、成功 FAIL、失败 PROCESSING、处理中 EXCEPTION、异常-->
+                a.TRX_STATUS_MSG as trxStatusMsg,  <!--交易状态描述(失败信息)-->
+                a.PLAT_TRX_DT_TM as platTrxDtTm,  <!--完成时间-->
+                a.NOTIFY_URL as notifyUrl,  <!--服务器回调URL-->
+                a.ATTACH as attach,  <!--附加数据-->
+                a.CREATE_BY as createBy,  <!--创建人-->
+                a.CREATE_TIME as createTime,  <!--创建时间-->
+                a.MODIFY_BY as modifyBy,  <!--修改人-->
+                a.MODIFY_TIME as modifyTime,  <!--修改时间-->
+                a.ATTRIBUTE1 as attribute1  <!--备用字段-->
+        from T_BENE_USER a
+        where 1 = 1
+        <include refid="queryParam" />
+    </select>
+
+    <select id="selectAllIdentNo" resultType="java.lang.String" parameterType="map">
+      SELECT  DISTINCT IDENT_NO FROM T_BENE_USER limit #{begin},#{end}
+    </select>
+
+
+    <select id="countIdentNo" resultType="java.lang.Long" >
+        SELECT COUNT(DISTINCT IDENT_NO) FROM T_BENE_USER
+    </select>
+
+    <select id="selectUserByIdentNo" resultType="com.example.demo.dto.UserEntityDto" parameterType="java.lang.String">
+        <!--select-->
+        <!--a.IDENT_NO as identNo,  &lt;!&ndash;用户证件号码_密文&ndash;&gt;-->
+        <!--a.USER_REAL_NAME as userRealName,  &lt;!&ndash;用户真实姓名_密文&ndash;&gt;-->
+        <!--a.USER_MOBILE_NO as userMobileNo,  &lt;!&ndash;用户手机号_密文&ndash;&gt;-->
+        <!--b.CARD_NO as cardNo,&lt;!&ndash;卡号 &ndash;&gt;-->
+        <!--d.BANK_BRA_NO as bankBraNo &lt;!&ndash;联行号 &ndash;&gt;-->
+        <!--from T_BENE_USER a-->
+        <!--left join T_BENE_BANK_CARD b on a.PLAT_USER_ID = b.PLAT_USER_ID and b.CARD_BUSINESS_TYPE = "02"-->
+        <!--left join T_BENE_BANK_CNAPS d on b.BANK_CODE = d.BANK_CODE-->
+        <!--where a.IDENT_NO = #{identNo}-->
+        SELECT * from USER_COPY_DATA where identNo = #{identNo}
+    </select>
+
+</mapper>

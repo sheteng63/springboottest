@@ -26,4 +26,45 @@ public class UserEntityDto {
      * 联行号
      */
     private String bankBraNo;
+
+
+    public String getUserRealName() {
+        return userRealName;
+    }
+
+    public void setUserRealName(String userRealName) {
+        this.userRealName = userRealName;
+    }
+
+    public String getIdentNo() {
+        return identNo;
+    }
+
+    public void setIdentNo(String identNo) {
+        this.identNo = identNo;
+    }
+
+    public String getUserMobileNo() {
+        return userMobileNo;
+    }
+
+    public void setUserMobileNo(String userMobileNo) {
+        this.userMobileNo = userMobileNo;
+    }
+
+    public String getCardNo() {
+        return cardNo;
+    }
+
+    public void setCardNo(String cardNo) {
+        this.cardNo = cardNo;
+    }
+
+    public String getBankBraNo() {
+        return bankBraNo;
+    }
+
+    public void setBankBraNo(String bankBraNo) {
+        this.bankBraNo = bankBraNo;
+    }
 }
