@@ -16,7 +16,9 @@ import java.util.Map;
 
 public interface UserExtraDao {
 
-   void insert(UserExtraEntity userExtraEntity);
+   int insertUserExtra(UserExtraEntity userExtraEntity);
+
+   int updateUserExtra();
 
 
 }

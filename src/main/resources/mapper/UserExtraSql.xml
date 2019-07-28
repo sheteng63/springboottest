@@ -44,7 +44,7 @@
     </sql>
 
     <!--插入-->
-    <insert id="insert" parameterType="com.example.demo.entity.UserExtraEntity">
+    <insert id="insertUserExtra" parameterType="com.example.demo.entity.UserExtraEntity">
         insert into T_BENE_USER_EXTRA(
         PLAT_USER_ID,
         MERCHANT_NO,
@@ -73,6 +73,24 @@
         #{attribute1}
         )
     </insert>
+
+    <!--更新-->
+    <update id="updateUserExtra" parameterType="com.example.demo.entity.UserExtraEntity">
+        update T_BENE_USER_EXTRA a
+        set
+        a.PLAT_USER_ID = #{platUserId},
+        a.MERCHANT_NO = #{merchantNo},
+        a.MERCHANT_STATUS = #{merchantStatus},
+        a.PRODUCT_STATUS = #{productStatus},
+        a.CREATE_TIME = #{createTime},
+        a.MODIFY_BY = #{createBy},
+        a.MODIFY_TIME = #{modifyTime},
+        a.QUERY_KEY = #{queryKey},
+        a.DES_KEY = #{desKey},
+        a.SIGN_KEY = #{signKey},
+        a.ATTRIBUTE1 = #{attribute1}
+        where 1=1
+    </update>
 
 
     <!--查询一批数据的查询-->
