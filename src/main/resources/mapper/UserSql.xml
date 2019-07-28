@@ -114,16 +114,17 @@
     </select>
 
     <select id="selectUserByIdentNo" resultType="com.example.demo.dto.UserEntityDto" parameterType="java.lang.String">
-        select
-        a.IDENT_NO as identNo,  <!--用户证件号码_密文-->
-        a.USER_REAL_NAME as userRealName,  <!--用户真实姓名_密文-->
-        a.USER_MOBILE_NO as userMobileNo,  <!--用户手机号_密文-->
-        b.CARD_NO as cardNo,<!--卡号 -->
-        d.BANK_BRA_NO as bankBraNo <!--联行号 -->
-        from T_BENE_USER a
-        left join T_BENE_BANK_CARD b on a.PLAT_USER_ID = b.PLAT_USER_ID and b.CARD_BUSINESS_TYPE = 2
-        left join T_BENE_BANK_CNAPS d on b.BANK_CODE = d.BANK_CODE
-        where a.IDENT_NO = #{identNo}
+        <!--select-->
+        <!--a.IDENT_NO as identNo,  &lt;!&ndash;用户证件号码_密文&ndash;&gt;-->
+        <!--a.USER_REAL_NAME as userRealName,  &lt;!&ndash;用户真实姓名_密文&ndash;&gt;-->
+        <!--a.USER_MOBILE_NO as userMobileNo,  &lt;!&ndash;用户手机号_密文&ndash;&gt;-->
+        <!--b.CARD_NO as cardNo,&lt;!&ndash;卡号 &ndash;&gt;-->
+        <!--d.BANK_BRA_NO as bankBraNo &lt;!&ndash;联行号 &ndash;&gt;-->
+        <!--from T_BENE_USER a-->
+        <!--left join T_BENE_BANK_CARD b on a.PLAT_USER_ID = b.PLAT_USER_ID and b.CARD_BUSINESS_TYPE = "02"-->
+        <!--left join T_BENE_BANK_CNAPS d on b.BANK_CODE = d.BANK_CODE-->
+        <!--where a.IDENT_NO = #{identNo}-->
+        SELECT * from USER_COPY_DATA where identNo = #{identNo}
     </select>
 
 </mapper>

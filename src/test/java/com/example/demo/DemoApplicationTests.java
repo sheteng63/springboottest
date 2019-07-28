@@ -1,23 +1,20 @@
 package com.example.demo;
 
 import com.example.demo.dao.UserDao;
-import com.example.demo.entity.UserEntity;
 
+import com.example.demo.service.impl.Contest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTests {
+
     @Autowired
     UserDao userDao;
 

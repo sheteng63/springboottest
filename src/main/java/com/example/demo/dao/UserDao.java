@@ -15,6 +15,7 @@ import java.util.Map;
  * @author ips
  * @version 1.0 2018-12-30 9:34:22
  */
+
 public interface UserDao {
 
    List<UserEntity> selectList(UserEntity userEntity);
