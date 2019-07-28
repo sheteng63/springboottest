@@ -35,10 +35,10 @@ public class MerchantServiceImpl implements MerchantService {
     private static String CHAR_ENCODING = "UTF-8";
 
     /** 商户入网接口url*/
-    private static String url = "http://portal.ronghuijinfubj.com/middlepayportal/merchant/in";
+    private static String url = "http://test.portal.ronghuijinfubj.com/middlepayportal/merchant/in";
 
     /** 商户产品开通url*/
-    private static String urlOpen = "http://portal.ronghuijinfubj.com/middlepayportal/merchant/openProduct";
+    private static String urlOpen = "http://test.portal.ronghuijinfubj.com/middlepayportal/merchant/openProduct";
 
     @Autowired
     private UserDao userDao;
