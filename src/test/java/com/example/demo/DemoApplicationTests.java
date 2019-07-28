@@ -2,7 +2,7 @@ package com.example.demo;
 
 import com.example.demo.dao.UserDao;
 import com.example.demo.entity.UserEntity;
-import com.example.demo.web.Contest;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,54 +39,9 @@ public class DemoApplicationTests {
 //		}
 //		doRegist();
 
-        Contest contest = new Contest();
-        contest.produce();
-        contest.consume();
-    }
-
-
-    @Async
-    public void doRegist() {
 
     }
 
-
-    @Async
-    public void consume() {
-        while (true) {
-            try {
-
-                while (list.isEmpty()) {
-                    wait();
-                }
-                list.take();
-                System.out.println("消费完了");
-                notifyAll();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    @Async
-    public void produce() {
-        while (true) {
-            try {
-                while (list.size() > 0) {
-                    wait();
-                }
-                for (int i = 0; i < 10; i++) {
-                    list.put(i + "");
-                }
-                System.out.println("生产完了");
-                notifyAll();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
 
 
     //目前到第几行了

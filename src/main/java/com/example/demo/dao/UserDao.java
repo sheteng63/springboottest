@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 
+import com.example.demo.dto.UserEntityDto;
 import com.example.demo.entity.UserEntity;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,6 +26,6 @@ public interface UserDao {
    Long countIdentNo();
 
    //根据身份证去查询这个身份证所有的用户
-   List<UserEntity> selectUserByIdentNo(String identNo);
+   List<UserEntityDto> selectUserByIdentNo(String identNo);
 
 }
