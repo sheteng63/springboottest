@@ -6,9 +6,11 @@ import com.example.demo.common.utils.Base64;
 import com.example.demo.common.utils.HttpRequest;
 import com.example.demo.common.utils.Md5Util;
 import com.example.demo.dao.UserDao;
+import com.example.demo.dao.UserExtraDao;
 import com.example.demo.dto.MerchantInResp;
 import com.example.demo.dto.MerchantOpenResp;
 import com.example.demo.dto.UserEntityDto;
+import com.example.demo.entity.UserExtraEntity;
 import com.example.demo.service.MerchantService;
 import com.ips.commons.security.IpsVerify;
 import com.ips.commons.security.StringUtils;
@@ -41,8 +43,13 @@ public class MerchantServiceImpl implements MerchantService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private UserExtraDao userExtraDao;
+
 
     public void merchantIn(String identNo){
+
+        UserExtraEntity userExtraEntity = new UserExtraEntity();
 
         List<UserEntityDto> userEntitylist = userDao.selectUserByIdentNo(identNo);
         UserEntityDto userEntity = userEntitylist.get(0);
@@ -99,9 +106,13 @@ public class MerchantServiceImpl implements MerchantService {
         String sign = Md5Util.MD5(JSON.toJSONString(map)+signkey);
         map.put("sign", sign);
         try{
+            LOGGER.info("-----》请求RHJF商户入网失败",JSON.toJSONString(map));
             String merIn = HttpRequest.sendPost(url, JSON.toJSONString(map));
             MerchantInResp resp = JSONObject.parseObject(merIn,MerchantInResp.class);
 
+            if("0000".equals(resp.getRespCode())){
+
+            }
 
         }catch (Exception e){
             LOGGER.error("-----》请求RHJF商户入网失败",e);
