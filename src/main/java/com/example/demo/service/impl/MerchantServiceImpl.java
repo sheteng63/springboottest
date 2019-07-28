@@ -106,8 +106,9 @@ public class MerchantServiceImpl implements MerchantService {
         String sign = Md5Util.MD5(JSON.toJSONString(map)+signkey);
         map.put("sign", sign);
         try{
-            LOGGER.info("-----》请求RHJF商户入网失败",JSON.toJSONString(map));
+            LOGGER.info("-----》请求RHJF商户入网请求信息",JSON.toJSONString(map));
             String merIn = HttpRequest.sendPost(url, JSON.toJSONString(map));
+            LOGGER.info("-----》请求RHJF商户入网返回信息",JSON.toJSONString(merIn));
             MerchantInResp resp = JSONObject.parseObject(merIn,MerchantInResp.class);
 
             if("0000".equals(resp.getRespCode())){
