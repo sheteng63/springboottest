@@ -38,7 +38,7 @@ public class Contest {
                         isWait = true;
                         lock.wait();
                     }
-                    System.out.println("生产者     线程号" + Thread.currentThread().getName());
+
                     isWait = false;
                     productData();
                 }
@@ -51,7 +51,7 @@ public class Contest {
     }
 
     private void productData() {
-        System.out.println("生产者     线程号" + Thread.currentThread().getName());
+
         try {
             if (current >= total) {
                 isFinish = true;
@@ -59,15 +59,16 @@ public class Contest {
             }
             HashMap<String, Object> map = new HashMap<>();
             map.put("begin", current);
-            long end = current + 1000;
+            long end = current + 2;
             if (end >= total) {
                 end = total;
             }
-            map.put("end", end);
+            map.put("end", end - current);
             List<String> identNos = userDao.selectAllIdentNo(map);
             current = end;
             for (String identNo : identNos) {
                 list.put(identNo);
+                LOG.info("生产者本次生产了" + identNo);
             }
             LOG.info("生产者本次生产了" + identNos.size());
             LOG.info("生产者总共生产了" + current);
@@ -83,7 +84,7 @@ public class Contest {
                     notifyProduct();
                 }
                 String take = (String) list.take();
-                System.out.println("消费者消费" + take + "     线程号" + Thread.currentThread().getName());
+                LOG.info("消费者消费" + take + "     线程号" + Thread.currentThread().getName());
                 Thread.sleep(1000);
             }
         } catch (Exception e) {
