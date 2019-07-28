@@ -111,10 +111,6 @@ public class MerchantServiceImpl implements MerchantService {
             LOGGER.info("-----》请求RHJF商户入网返回信息",JSON.toJSONString(merIn));
             MerchantInResp resp = JSONObject.parseObject(merIn,MerchantInResp.class);
 
-            if("0000".equals(resp.getRespCode())){
-
-            }
-
         }catch (Exception e){
             LOGGER.error("-----》请求RHJF商户入网失败",e);
         }
