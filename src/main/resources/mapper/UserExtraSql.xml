@@ -77,18 +77,41 @@
     <!--更新-->
     <update id="updateUserExtra" parameterType="com.example.demo.entity.UserExtraEntity">
         update T_BENE_USER_EXTRA a
-        set
-        a.PLAT_USER_ID = #{platUserId},
-        a.MERCHANT_NO = #{merchantNo},
-        a.MERCHANT_STATUS = #{merchantStatus},
-        a.PRODUCT_STATUS = #{productStatus},
-        a.CREATE_TIME = #{createTime},
-        a.MODIFY_BY = #{createBy},
-        a.MODIFY_TIME = #{modifyTime},
-        a.QUERY_KEY = #{queryKey},
-        a.DES_KEY = #{desKey},
-        a.SIGN_KEY = #{signKey},
-        a.ATTRIBUTE1 = #{attribute1}
+        <set>
+            <if test="platUserId!=null">
+                a.PLAT_USER_ID = #{platUserId},
+            </if>
+            <if test="merchantNo!=null">
+                a.MERCHANT_NO = #{merchantNo},
+            </if>
+            <if test="merchantStatus!=null">
+                a.MERCHANT_STATUS = #{merchantStatus},
+            </if>
+            <if test="productStatus!=null">
+                a.PRODUCT_STATUS = #{productStatus},
+            </if>
+            <if test="createTime!=null">
+                a.CREATE_TIME = #{createTime},
+            </if>
+            <if test="createBy!=null">
+                a.MODIFY_BY = #{createBy},
+            </if>
+            <if test="modifyTime!=null">
+                a.MODIFY_TIME = #{modifyTime},
+            </if>
+            <if test="queryKey!=null">
+                a.QUERY_KEY = #{queryKey},
+            </if>
+            <if test="desKey!=null">
+                a.DES_KEY = #{desKey},
+            </if>
+            <if test="signKey!=null">
+                a.SIGN_KEY = #{signKey},
+            </if>
+            <if test="attribute1!=null">
+                a.ATTRIBUTE1 = #{attribute1}
+            </if>
+        </set>
         where 1=1
     </update>
 
